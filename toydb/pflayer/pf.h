@@ -1,4 +1,6 @@
 /* pf.h: externs and error codes for Paged File Interface*/
+#ifndef PF_H
+#define PF_H
 #ifndef TRUE
 #define TRUE 1		
 #endif
@@ -43,6 +45,23 @@ extern int PFerrno;		/* error number of last error */
 extern void PF_Init();
 extern void PF_PrintError(char *s);
 
+/* Add these missing prototypes */
+int PF_CreateFile(char *fname);
+int PF_DestroyFile(char *fname);
+int PF_OpenFile(char *fname);
+int PF_CloseFile(int fd);
+int PF_AllocPage(int fd, int *pagenum, char **pagebuf);
+int PF_DisposePage(int fd, int pagenum);
+int PF_GetThisPage(int fd, int pagenum, char **pagebuf);
+int PF_UnfixPage(int fd, int pagenum, int dirty);
+int PF_GetNextPage(int fd, int *pagenum, char **pagebuf);
+void PF_ResetStats();
+void PF_PrintStats();
+void PF_SetReplacementPolicy(int policy);
+void PF_SetBufferSize(int size);
+
+/* Statistics for PF layer */
+
 
 /* Statistics for PF layer */
 
@@ -55,6 +74,8 @@ typedef struct {
 
 /* global stats object */
 extern PF_Stats PF_stats;
+
+#endif
 
 /* Global replacement policy (set via PF_SetReplacementPolicy) */
 extern int PF_replacementPolicy;
