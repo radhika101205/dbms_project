@@ -1,8 +1,8 @@
-
 # include <stdio.h>
+#include <string.h>
 # include "am.h"
 # include "pf.h"
-
+static int GetLeftPageNum(int fileDesc);
 /* The structure of the scan Table */
 struct {
          int fileDesc;
@@ -22,13 +22,8 @@ struct {
 
 
 /* Opens an index scan */
-AM_OpenIndexScan(fileDesc,attrType,attrLength,op,value)
-int fileDesc; /* file Descriptor */
-
-char attrType; /* 'i' or 'c' or 'f' */
-int attrLength; /* 4 for 'i' or 'f' , 1-255 for 'c' */
-int op; /* operator for comparison */
-char *value; /* value for comparison */
+int AM_OpenIndexScan(int fileDesc, char attrType, int attrLength,
+                     int op, char *value)
 
 {
 int scanDesc; /* index into scan table */
@@ -277,9 +272,7 @@ return(scanDesc);
 
 /* returns the record id of the next record that satisfies the conditions
 specified for index scan associated with scanDesc */
-AM_FindNextEntry(scanDesc)
-int scanDesc;/* index scan descriptor */
-
+int AM_FindNextEntry(int scanDesc)
 {
 int recId; /* recordId to be returned */
 char *pageBuf;/* buffer for page */
@@ -470,9 +463,7 @@ return(recId);
 
 
 /* terminates an index scan */
-AM_CloseIndexScan(scanDesc)
-int scanDesc;/* scan Descriptor*/
-
+int AM_CloseIndexScan(int scanDesc)
 {
 if ((scanDesc < 0) || (scanDesc > MAXSCANS - 1))
   {
@@ -484,9 +475,7 @@ return(AME_OK);
 }
 
 
-GetLeftPageNum(fileDesc)
-int fileDesc;
-
+static int GetLeftPageNum(int fileDesc)
 {
 char *pageBuf;
 int pageNum;

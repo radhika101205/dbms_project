@@ -1,11 +1,12 @@
 # include <stdio.h>
 # include "am.h"
 # include "pf.h"
+#include <strings.h>   /* for bcopy */
 
 /* searches for a key in a binary tree - returns FOUND or NOTFOUND and
 returns the pagenumber and the offset where key is present or could 
 be inserted */
-AM_Search(fileDesc,attrType,attrLength,value,pageNum,pageBuf,indexPtr)
+int AM_Search(fileDesc,attrType,attrLength,value,pageNum,pageBuf,indexPtr)
 int fileDesc;
 char attrType;
 int attrLength;
@@ -86,7 +87,7 @@ int *indexPtr; /* pointer to index in leaf where key is present or
 
 
 /* Finds the place (index) from where the next page to be followed is got*/
-AM_BinSearch(pageBuf,attrType,attrLength,value,indexPtr,header)
+int AM_BinSearch(pageBuf,attrType,attrLength,value,indexPtr,header)
 char *pageBuf; /* buffer where the page is found */
 char attrType; 
 int attrLength;
@@ -178,7 +179,7 @@ AM_INTHEADER *header;
 
 /* search a leaf node for the key- returns the place where it is found or can
 be inserted */
-AM_SearchLeaf(pageBuf,attrType,attrLength,value,indexPtr,header)
+int AM_SearchLeaf(pageBuf,attrType,attrLength,value,indexPtr,header)
 char *pageBuf; /* buffer where the leaf page resides */
 char attrType;
 int attrLength;
@@ -291,7 +292,7 @@ AM_LEAFHEADER *header;
 /* Compare value in bufPtr with value in valPtr - returns -1 ,0 or 1 according
 to whether value in valPtr is less than , equal to or greater than value 
 in BufPtr*/
-AM_Compare(bufPtr,attrType,attrLength,valPtr)
+int AM_Compare(bufPtr,attrType,attrLength,valPtr)
 char *bufPtr;
 char attrType;
 char *valPtr;

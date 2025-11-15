@@ -7,7 +7,7 @@
 #define MAXRECS	10000	/* max # of records to insert */
 #define FNAME_LENGTH 80	/* file name size */
 
-main()
+int main(void)
 {
 int fd;	/* file descriptor for the index */
 char fname[FNAME_LENGTH];	/* file name */

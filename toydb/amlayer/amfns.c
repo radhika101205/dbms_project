@@ -1,11 +1,11 @@
 # include <stdio.h>
+#include <strings.h>   /* for bcopy */
 # include "pf.h"
 # include "am.h"
 
 
-
 /* Creates a secondary idex file called fileName.indexNo */
-AM_CreateIndex(fileName,indexNo,attrType,attrLength)
+int AM_CreateIndex(fileName,indexNo,attrType,attrLength)
 char *fileName;/* Name of indexed file */
 int indexNo;/*number of this index for file */
 char attrType;/* 'c' for char ,'i' for int ,'f' for float */
@@ -93,7 +93,7 @@ int attrLength; /* 4 for 'i' or 'f', 1-255 for 'c' */
 
 
 /* Destroys the index fileName.indexNo */
-AM_DestroyIndex(fileName,indexNo)
+int AM_DestroyIndex(fileName,indexNo)
 char *fileName;/* name of indexed file */
 int indexNo; /* number of this index for file */
 
@@ -110,7 +110,7 @@ int indexNo; /* number of this index for file */
 
 /* Deletes the recId from the list for value and deletes value if list
 becomes empty */
-AM_DeleteEntry(fileDesc,attrType,attrLength,value,recId)
+int AM_DeleteEntry(fileDesc,attrType,attrLength,value,recId)
 int fileDesc; /* file Descriptor */
 char attrType; /* 'c' , 'i' or 'f' */
 int attrLength; /* 4 for 'i' or 'f' , 1-255 for 'c' */
@@ -238,13 +238,8 @@ int recId; /* id of the record to delete */
 
 
 
-
-
-
-
-
 /* Inserts a value,recId pair into the tree */
-AM_InsertEntry(fileDesc,attrType,attrLength,value,recId)
+int AM_InsertEntry(fileDesc,attrType,attrLength,value,recId)
 int fileDesc; /* file Descriptor */
 char attrType; /* 'i' or 'c' or 'f' */
 int attrLength; /* 4 for 'i' or 'f', 1-255 for 'c' */
@@ -370,7 +365,7 @@ static char *AMerrormsg[] = {
 };
 
 
-AM_PrintError(s)
+void AM_PrintError(s)
 char *s;
 
 {
