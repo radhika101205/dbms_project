@@ -360,3 +360,124 @@ int HF_GetRec(int fd, RID rid, char **record, int *recLen) {
 
     return error; // Return result of HF_Page_GetRec
 }
+
+/*
+ * ======================================================
+ * File Scan Function Implementations
+ * ======================================================
+ */
+
+/*
+ * Opens a new file scan.
+ *
+ * Initializes the scan struct to start from the beginning
+ * of the file.
+ */
+int HF_OpenFileScan(int fd, HF_Scan *scan) {
+    // Store the file descriptor
+    scan->fd = fd;
+    
+    // Start the scan *before* the first page
+    scan->currentPageNum = -1; 
+    
+    // No record has been found yet
+    scan->currentSlotNum = -1;
+    
+    // No page is pinned in the buffer yet
+    scan->currentPageBuf = NULL;
+    
+    return HFE_OK;
+}
+
+/*
+ * Closes a file scan.
+ *
+ * This function must be called to unfix the last page
+ * that the scanner was looking at.
+ */
+int HF_CloseFileScan(HF_Scan *scan) {
+    int error;
+    
+    // Check if a page is still pinned in the buffer
+    if (scan->currentPageBuf != NULL) {
+        // Unfix it (it wasn't modified)
+        error = PF_UnfixPage(scan->fd, scan->currentPageNum, FALSE);
+        if (error != PFE_OK) {
+            return error;
+        }
+    }
+    
+    // Reset the scan struct
+    scan->fd = -1;
+    scan->currentPageBuf = NULL;
+    
+    return HFE_OK;
+}
+
+/*
+ * Retrieves the next valid record in the file scan.
+ */
+/*
+ * Retrieves the next valid record in the file scan.
+ */
+int HF_GetNextRec(int fd, HF_Scan *scan, RID *rid, char **record, int *recLen) {
+    int error;
+
+    // This is the main scanner loop
+    while (TRUE) {
+        
+        // --- 1. Try to find the next record on the current page ---
+        
+        // Check if we have a page loaded
+        if (scan->currentPageBuf != NULL) {
+            
+            // Call our page-level scanner. It returns the slot number.
+            int slot = HF_Page_GetNextRec(scan->currentPageBuf, 
+                                        scan->currentSlotNum, 
+                                        record, 
+                                        recLen);
+            
+            if (slot >= 0) { // HFE_OK is 0, but this is safer
+                // --- Success! Found a record on this page ---
+                
+                // Update the scanner's state
+                scan->currentSlotNum = slot;
+                
+                // Set the output RID
+                rid->pageNum = scan->currentPageNum;
+                rid->slotNum = scan->currentSlotNum;
+                
+                return HFE_OK;
+            }
+            
+            // If we're here, the result was HFE_EOF (no more records on this page)
+            // Unfix the current page
+            if ((error = PF_UnfixPage(scan->fd, scan->currentPageNum, FALSE)) != PFE_OK) {
+                return error; // Propagate error
+            }
+            scan->currentPageBuf = NULL;
+        }
+
+        // --- 2. Get the next page in the file ---
+        
+        // PF_GetNextPage gets the page *after* scan->currentPageNum
+        error = PF_GetNextPage(scan->fd, &scan->currentPageNum, &scan->currentPageBuf);
+        
+        if (error == PFE_EOF) {
+            // --- End of File ---
+            // No more pages left to scan
+            return HFE_EOF;
+        }
+        
+        if (error != PFE_OK) {
+            // A real PF error occurred
+            return error;
+        }
+
+        // --- 3. Got a new page, reset page scanner ---
+        
+        // Reset the slot number to start scanning this new page
+        // from the beginning in the next loop iteration.
+        scan->currentSlotNum = -1;
+    }
+}

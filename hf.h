@@ -104,4 +104,56 @@ int HF_DeleteRec(int fd, RID rid);
  */
 int HF_GetRec(int fd, RID rid, char **record, int *recLen);
 
+/*
+ * ======================================================
+ * File Scan Function Prototypes
+ * ======================================================
+ */
+
+// This struct will keep track of the scanner's state
+typedef struct {
+    int   fd;             // The file descriptor
+    int   currentPageNum; // Page number of the current page
+    int   currentSlotNum; // Slot number of the last record found
+    char *currentPageBuf; // Pinned buffer for the current page
+} HF_Scan;
+
+
+/*
+ * Opens a new file scan.
+ *
+ * Inputs:
+ * fd: The file descriptor
+ *
+ * Outputs:
+ * scan: A pointer to an HF_Scan struct that will be
+ * initialized by this function.
+ *
+ * Returns:
+ * HFE_OK on success
+ */
+int HF_OpenFileScan(int fd, HF_Scan *scan);
+
+/*
+ * Retrieves the next valid record in the file scan.
+ *
+ * Inputs:
+ * scan: The HF_Scan struct initialized by OpenFileScan
+ *
+ * Outputs:
+ * rid: The RID of the next record
+ * record: Pointer to the record's data
+ * recLen: Length of the record
+ *
+ * Returns:
+ * HFE_OK on success
+ * HFE_EOF when no more records are found
+ */
+int HF_GetNextRec(int fd, HF_Scan *scan, RID *rid, char **record, int *recLen);
+
+/*
+ * Closes a file scan.
+ */
+int HF_CloseFileScan(HF_Scan *scan);
+
 #endif // HF_H
