@@ -36,6 +36,7 @@ void AM_PrintError(char *s);
 /* -------- Scan API (implemented in amscan.c) ------- */
 int AM_OpenIndexScan(int fileDesc, char attrType, int attrLength,
                      int op, char *value);
+					 
 /* Debug / printing helpers (amprint.c) */
 void AM_PrintIntNode(char *pageBuf, char attrType);
 void AM_PrintLeafNode(char *pageBuf, char attrType);
@@ -43,6 +44,8 @@ void AM_DumpLeafPages(int fileDesc, int min, char attrType, int attrLength);
 void AM_PrintLeafKeys(char *pageBuf, char attrType);
 void AM_PrintAttr(char *bufPtr, char attrType, int attrLength);
 void AM_PrintTree(int fileDesc, int pageNum, char attrType);
+int AM_OpenIndex(char *fileName, int indexNo);
+int AM_CloseIndex(int fileDesc);
 
 int AM_FindNextEntry(int scanDesc);
 
