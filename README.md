@@ -2,8 +2,6 @@
 ---
 ````markdown
 
-
-
 `````
 
 # CSL3050 – ToyDB Buffering, Slotted Pages and Indexing
