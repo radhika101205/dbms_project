@@ -320,11 +320,10 @@ Space utilisation (static) = 0.3291 (32.91%)
 
 **Conclusion:** The slotted-page heap file achieves ~**90%** space utilisation, significantly better than typical fixed-length layouts for the same data.
 
-You can optionally add a small table or screenshot in the repo, e.g.:
 
-```markdown
+
 ![Space utilisation output](images/spaceutil_student_output.png)
-```
+
 
 ---
 
