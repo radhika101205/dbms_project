@@ -322,7 +322,8 @@ Space utilisation (static) = 0.3291 (32.91%)
 
 
 
-![Space utilisation output](images/spaceutil_student_output.png)
+![Space utilization test output](./toydb/pflayer/Space_utilization_stats.png)
+
 
 
 ---
@@ -402,7 +403,6 @@ Range-like query time (mode 2) = <FILL_EQ_RANGE_TIME_MODE2_MS>
 student_index experiment done (mode 2).
 ```
 
-(You can fill in the exact equality / range query times from your latest run.)
 
 ### 5.3. Observations
 
