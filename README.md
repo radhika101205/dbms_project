@@ -460,6 +460,6 @@ make student_index
 * We implemented a **configurable buffer manager** in the PF layer with **LRU/MRU** replacement, dirty flags, and detailed I/O statistics.
 * On top of PF we built a **slotted-page heap file** for variable-length `student` records, showing much higher space utilisation (~90%) compared to multiple fixed-length layouts (33–66%).
 * Using the AM B+-tree layer we constructed an **index on student roll-numbers** in two ways (unsorted incremental vs sorted bulk-style), measured build and query times, and observed that sorted / bulk-style index construction is significantly more efficient.
-```
+
 
 
