@@ -1,3 +1,5 @@
+---
+
 ````markdown
 # CSL3050 – ToyDB Buffering, Slotted Pages and Indexing
 **Course:** Database Systems  
@@ -442,24 +444,6 @@ make student_index
 ./student_index ../../data/student.txt 1   # unsorted inserts
 ./student_index ../../data/student.txt 2   # sorted inserts (bulk-style)
 ```
-
----
-
-## 7. Packaging & Submission
-
-1. Ensure all code is properly commented and compiles cleanly using `make` in `pflayer/` and `amlayer/`.
-2. Place this `README.md` at the root of `toydb/`.
-3. Include generated plots / screenshots under appropriate folders (e.g. `pflayer/` or `images/`) if you want them visible on GitHub.
-4. From the directory that contains both `pflayer/` and `amlayer/`, create the submission archive:
-
-```bash
-cd ..
-tar czf B23CS1059-<partnerRollNo>.tar.gz toydb
-```
-
-5. Upload the `rollno1-rollno2.tar.gz` file to Google Classroom as per instructions.
-
-> **Note:** As per the assignment, after submission only the config file may be changed. Any modifications to C source files after submission incur penalties, so please verify everything before uploading.
 
 ---
 
