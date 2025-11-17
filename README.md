@@ -209,11 +209,11 @@ This produces three PNGs in `pflayer/`:
 * `pf_physical_writes.png`
 
 
-```markdown
+
 ![Logical reads vs write mix](./toydb/pflayer/pf_logical_reads.png)
 ![Physical reads vs write mix](./toydb/pflayer/pf_physical_reads.png)
 ![Physical writes vs write mix](./toydb/pflayer/pf_physical_writes.png)
-```
+
 
 ---
 
