@@ -208,12 +208,11 @@ This produces three PNGs in `pflayer/`:
 * `pf_physical_reads.png`
 * `pf_physical_writes.png`
 
-You can embed them in reports / GitHub as:
 
 ```markdown
-![Logical reads vs write mix](pflayer/pf_logical_reads.png)
-![Physical reads vs write mix](pflayer/pf_physical_reads.png)
-![Physical writes vs write mix](pflayer/pf_physical_writes.png)
+![Logical reads vs write mix](/toydb/pflayer/pf_logical_reads.png)
+![Physical reads vs write mix](/toydb/pflayer/pf_physical_reads.png)
+![Physical writes vs write mix](/toydb/pflayer/pf_physical_writes.png)
 ```
 
 ---
