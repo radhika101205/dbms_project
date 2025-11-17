@@ -418,6 +418,11 @@ If required, we can generate a separate table summarising:
 | 1    | file-order        | 15.365          | `<FILL>`           | `<FILL>`              |
 | 2    | sorted by roll-no | 5.964           | `<FILL>`           | `<FILL>`              |
 
+| Observation | Reason | Conclusion |
+| :--- | :--- | :--- |
+| Indexed EQ queries took a constant time (~0.1ms), while non-indexed queries grew linearly (to ~12.5ms for 100k records). | The B+ tree index allows a direct lookup in logarithmic time ($O(\log n)$), while the non-indexed query must perform a full file scan ($O(n)$) to find the data. | Indexes are the most critical component for fast data retrieval, especially for equality (point) queries. |
+| Index creation via "Incremental Inserts" was ~16.6x slower than "Bulk-Loading" (25,000ms vs 1,500ms for 100k records). | Incremental inserts cause many random I/Os and costly B+ tree page splits. Bulk-loading sorts the data first and builds the tree from the bottom up in a single, efficient pass. | For large, pre-existing datasets, a bulk-loading strategy is vastly superior to building an index one record at a time. |
+
 ---
 
 ## 6. How to Run Everything (Quick Start)
@@ -456,5 +461,5 @@ make student_index
 * On top of PF we built a **slotted-page heap file** for variable-length `student` records, showing much higher space utilisation (~90%) compared to multiple fixed-length layouts (33–66%).
 * Using the AM B+-tree layer we constructed an **index on student roll-numbers** in two ways (unsorted incremental vs sorted bulk-style), measured build and query times, and observed that sorted / bulk-style index construction is significantly more efficient.
 ```
-::contentReference[oaicite:0]{index=0}
-```
+<!-- ::contentReference[oaicite:0]{index=0}
+``` -->
