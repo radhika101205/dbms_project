@@ -4,7 +4,7 @@
 # CSL3050 – ToyDB Buffering, Slotted Pages and Indexing
 **Course:** Database Systems  
 **Assignment:** ToyDB – PF & AM Extensions  
-**Group:** Saher Dev (B23CS1059), Radhika Agrawal (B23ES1027)
+**Group:** Saher Dev (B23CS1059), Radhika Agarwal (B23ES1027)
 
 This project extends the provided **ToyDB** system, which implements the two lower layers of a DBMS:
 
