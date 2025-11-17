@@ -1,69 +1,8 @@
 
 ---
-
 ````markdown
-Yeah, this is just a fencing issue 🙂
 
-You have *nested* code fences and one of them isn’t closed correctly:
-
-* You start the whole thing with `markdown …`,
-* **Inside** that you open a block with ```text but close it with ```` (4 backticks).
-* In a real `README.md` you **don’t** want the outer ````markdown fences at all.
-
-Here’s the **fixed** README snippet. In your actual `README.md`, copy-paste everything **between** the fences below (don’t include the `markdown / ` themselves):
-
-````markdown
-# CSL3050 – ToyDB Buffering, Slotted Pages and Indexing
-**Course:** Database Systems  
-**Assignment:** ToyDB – PF & AM Extensions  
-**Group:** Saher Dev (B23CS1059), Radhika Agrawal (B23ES1027)
-
-This project extends the provided **ToyDB** system, which implements the two lower layers of a DBMS:
-
-- **PF (Paged File) layer** – fixed–size pages on disk  
-- **AM (Access Method) layer** – B\+-tree based indexing on top of PF  
-
-We implement:
-
-1. **Configurable page buffering** in the PF layer with **LRU** and **MRU** replacement, dirty–page handling, and statistics.  
-2. A **slotted-page heap file** for variable–length student records, including **space-utilisation analysis** against static fixed-length layouts.  
-3. Index construction on the **student** file using the AM layer:  
-   - (a) incremental inserts on unsorted data  
-   - (b) bulk-style build from data sorted by roll-number  
-   and a comparison of performance (build time, query time, approximate page I/Os).
-
-The repository also contains small driver programs to run experiments and generate plots.
-
----
-
-## 1. Repository Structure
-
-Relative to the root `toydb/`:
-
-```text
-toydb/
-├── data/
-│   └── student.txt              # given dummy student table (semicolon-separated)
-├── pflayer/
-│   ├── pf.c, pf.h, pftypes.h    # PF layer + buffer manager extensions
-│   ├── buf.c, hash.c            # buffer and hash table for page frames
-│   ├── pfbench.c                # PF benchmark (read/write mixes, LRU vs MRU)
-│   ├── hf.c                     # heap-file API built on PF (slotted pages)
-│   ├── hfstudent.c              # load/scan student heap file
-│   ├── spaceutil_student.c      # compute space utilisation vs static layouts
-│   ├── pf_plot.py               # Python script to plot PF statistics
-│   ├── student.hf               # (generated) student heap-file
-│   ├── pf_logical_reads.png     # (generated) plot: logical reads vs write %
-│   ├── pf_physical_reads.png    # (generated) plot: physical reads vs write %
-│   └── pf_physical_writes.png   # (generated) plot: physical writes vs write %
-├── amlayer/
-│   ├── am.c, am.h, ...          # AM (B+-tree) implementation (given + minor fixes)
-│   ├── main.c                   # original AM test driver
-│   └── student_index.c          # our index build/experiment driver
-└── README.md                    # this file
 ````
-
-If some generated images/files are missing, they will be created the first time you run the corresponding driver.
 
 ---
 
