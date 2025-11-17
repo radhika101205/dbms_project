@@ -751,6 +751,12 @@ RETURN VALUE:
 		PFerrno = PFE_INVALIDPAGE;
 		return(PFerrno);
 	}
+<<<<<<< HEAD
+=======
+	if (dirty) {
+        PF_stats.logicalWrites++;   // count a logical write: page modified by a query
+    }
+>>>>>>> upstream/main
 
 	return(PFbufUnfix(fd,pagenum,dirty));
 }

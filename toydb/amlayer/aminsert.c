@@ -1,8 +1,13 @@
 # include <stdio.h>
+<<<<<<< HEAD
+=======
+#include <string.h>
+>>>>>>> upstream/main
 # include "am.h"
 # include "pf.h"
 
 /* Inserts a key into a leaf node */
+<<<<<<< HEAD
 AM_InsertintoLeaf(pageBuf,attrLength,value,recId,index,status)
 char *pageBuf;/* buffer where the leaf page resides */
 int attrLength;
@@ -10,6 +15,10 @@ char *value;/* attribute value to be inserted*/
 int recId;/* recid of the attribute to be inserted */
 int index;/* index where key is to be inserted */
 int status;/* Whether key is a new key or an old key */
+=======
+int AM_InsertintoLeaf(char *pageBuf, int attrLength, char *value,
+                      int recId, int index, int status)
+>>>>>>> upstream/main
 
 {
 	int recSize;
@@ -82,12 +91,17 @@ int status;/* Whether key is a new key or an old key */
 
 
 /* Insert into leaf given the fact that the key is old */
+<<<<<<< HEAD
 AM_InsertToLeafFound(pageBuf,recId,index,header)
 char *pageBuf;
 int recId;
 int index;
 AM_LEAFHEADER *header;
 
+=======
+void AM_InsertToLeafFound(char *pageBuf, int recId, int index,
+                          AM_LEAFHEADER *header)
+>>>>>>> upstream/main
 {
 	int recSize;
 	short tempPtr;
@@ -124,6 +138,7 @@ AM_LEAFHEADER *header;
 
 
 /* Insert to a leaf given that the key is new */
+<<<<<<< HEAD
 AM_InsertToLeafNotFound(pageBuf,value,recId,index,header)
 char *pageBuf;
 char *value;
@@ -131,6 +146,10 @@ int recId;
 int index;
 AM_LEAFHEADER *header;
 
+=======
+void AM_InsertToLeafNotFound(char *pageBuf, char *value, int recId,
+                             int index, AM_LEAFHEADER *header)
+>>>>>>> upstream/main
 {
 	int recSize;
 	short null = AM_NULL;
@@ -160,6 +179,7 @@ AM_LEAFHEADER *header;
 /* There may be quite a few entries in the freelist but there may not 
 be space in the middle for a new key. This compacts all the recid's to the right
 so that there is enough space in the middle */
+<<<<<<< HEAD
 AM_Compact(low,high,pageBuf,tempPage,header)
 
 int low;
@@ -168,6 +188,10 @@ char *pageBuf;
 char *tempPage;
 AM_LEAFHEADER *header;
 
+=======
+void AM_Compact(int low, int high, char *pageBuf, char *tempPage,
+                AM_LEAFHEADER *header)
+>>>>>>> upstream/main
 {
 
 	short nextRec;

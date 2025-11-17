@@ -1,4 +1,5 @@
 # include <stdio.h>
+<<<<<<< HEAD
 # include "am.h"
 # include "pf.h"
 
@@ -6,6 +7,20 @@
 /* splits a leaf node */
 
 AM_SplitLeaf(fileDesc,pageBuf,pageNum,attrLength,recId,value,status,index,key)
+=======
+#include<strings.h>
+#include <string.h>  
+# include "am.h"
+# include "pf.h"
+
+/* splits a leaf node */
+// void bcopy(char* s1, char *s2, int nbytes)
+// {
+// memcpy(s2,s1,nbytes);
+// }
+
+int AM_SplitLeaf(fileDesc,pageBuf,pageNum,attrLength,recId,value,status,index,key)
+>>>>>>> upstream/main
 int fileDesc; /* file descriptor */
 char *pageBuf; /* pointer to buffer */
 int *pageNum; /* pagenumber of new leaf created */
@@ -108,8 +123,14 @@ char *key; /* returns the key to be filled in the parent */
 	}
 }
 
+<<<<<<< HEAD
 /* Adds to the parent(on top of the path stack) attribute value and page Number*/
 AM_AddtoParent(fileDesc,pageNum,value,attrLength)
+=======
+
+/* Adds to the parent(on top of the path stack) attribute value and page Number*/
+int AM_AddtoParent(fileDesc,pageNum,value,attrLength)
+>>>>>>> upstream/main
 int fileDesc;
 int pageNum; /* page Number to be added to parent */
 char *value; /*  pointer to attribute value to be added - 
@@ -215,7 +236,11 @@ int attrLength;
 
 
 /* adds a key to an internal node */
+<<<<<<< HEAD
 AM_AddtoIntPage(pageBuf,value,pageNum,header,offset)
+=======
+void AM_AddtoIntPage(pageBuf,value,pageNum,header,offset)
+>>>>>>> upstream/main
 char *pageBuf;
 char *value; /* value to be added to the node */
 int pageNum; /* page number of child to be inserted */
@@ -248,7 +273,11 @@ AM_INTHEADER *header;
 
 
 /* Fills the header and inserts a key into a new root */
+<<<<<<< HEAD
 AM_FillRootPage(pageBuf,pageNum1,pageNum2,value,attrLength,maxKeys)
+=======
+void AM_FillRootPage(pageBuf,pageNum1,pageNum2,value,attrLength,maxKeys)
+>>>>>>> upstream/main
 char *pageBuf;/* buffer to new root */
 int pageNum1,pageNum2;/* pagenumbers of it;s two children*/
 char *value; /* attr value to be inserted */
@@ -273,7 +302,11 @@ short attrLength,maxKeys; /* some info about the header */
 
 
 /* Split an internal node */
+<<<<<<< HEAD
 AM_SplitIntNode(pageBuf,pbuf1,pbuf2,header,value,pageNum,offset)
+=======
+void AM_SplitIntNode(pageBuf,pbuf1,pbuf2,header,value,pageNum,offset)
+>>>>>>> upstream/main
 char *pageBuf;/* internal node to be split */
 char *pbuf1,*pbuf2; /* the buffers for the two halves */
 char *value; /*  pointer to key to be added and to be returned to parent*/
@@ -331,7 +364,11 @@ int pageNum,offset;
 
 }
 
+<<<<<<< HEAD
 bcopy(char* s1, char *s2, int nbytes)
 {
 memcpy(s2,s1,nbytes);
 }
+=======
+
+>>>>>>> upstream/main
