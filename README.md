@@ -413,10 +413,10 @@ student_index experiment done (mode 2).
 
 If required, we can generate a separate table summarising:
 
-| Mode | Insertion order   | Build time (ms) | EQ query time (ms) | Range query time (ms) |
-| ---- | ----------------- | --------------- | ------------------ | --------------------- |
-| 1    | file-order        | 15.365          | `<FILL>`           | `<FILL>`              |
-| 2    | sorted by roll-no | 5.964           | `<FILL>`           | `<FILL>`              |
+| Mode |    Insertion order   |      Build time (ms)   | 
+| ---- | -------------------- |  ----------------------| 
+| 1    |    file-order        |         15.365         |
+| 2    |  sorted by roll-no   |          5.964         | 
 
 | Observation | Reason | Conclusion |
 | :--- | :--- | :--- |
@@ -461,5 +461,5 @@ make student_index
 * On top of PF we built a **slotted-page heap file** for variable-length `student` records, showing much higher space utilisation (~90%) compared to multiple fixed-length layouts (33–66%).
 * Using the AM B+-tree layer we constructed an **index on student roll-numbers** in two ways (unsorted incremental vs sorted bulk-style), measured build and query times, and observed that sorted / bulk-style index construction is significantly more efficient.
 ```
-<!-- ::contentReference[oaicite:0]{index=0}
-``` -->
+
+
