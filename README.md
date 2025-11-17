@@ -4,15 +4,9 @@
 
 ````
 
----
 
 `````
 
-Key fixes:
-
-- Inner ```text block now closes with ``` (3 backticks), not ````.
-- No extra outer ````markdown … ```` around the whole file when you actually save it as `README.md`.
-::contentReference[oaicite:0]{index=0}
 `````
 
 # CSL3050 – ToyDB Buffering, Slotted Pages and Indexing
