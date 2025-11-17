@@ -1,20 +1,16 @@
-Here’s a full `README.md` you can drop at the root of `toydb/`.
-You can tweak roll numbers, names, and image paths as needed.
-
 ---
-
 ````markdown
 # CSL3050 – ToyDB Buffering, Slotted Pages and Indexing
 **Course:** Database Systems  
 **Assignment:** ToyDB – PF & AM Extensions  
-**Group:** Saher Dev (B23CS1059), _<partner roll no / name>_
+**Group:** Saher Dev (B23CS1059), Radhika Agrawal (B23ES1027)
 
 This project extends the provided **ToyDB** system, which implements the two lower layers of a DBMS:
 
 - **PF (Paged File) layer** – fixed–size pages on disk
 - **AM (Access Method) layer** – B\+-tree based indexing on top of PF
 
-On top of the instructor’s code we implement:
+ We implement:
 
 1. **Configurable page buffering** in the PF layer with **LRU** and **MRU** replacement, dirty–page handling, and statistics.
 2. A **slotted-page heap file** for variable–length student records, including **space-utilisation analysis** against static fixed-length layouts.
